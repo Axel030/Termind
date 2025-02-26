@@ -1,0 +1,4 @@
+deepseek-ai
+psycopg2-binary  # Para PostgreSQL
+python-dotenv    # Manejo de variables de entorno
+sqlalchemy       # Opcional
