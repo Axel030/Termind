@@ -21,4 +21,3 @@ app.listen(PORT, (error) =>
         console.log("Error is server");
     }
 });
-
