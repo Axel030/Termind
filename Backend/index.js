@@ -1,4 +1,6 @@
 console.clear(); //a los que veran temas de servidores, es para que se limpie la consola en caso de guradar cambios en tiempo real
+// para init el server usar npm run dev
+// dejar de init el sercer control + c
 const express = require('express'); 
 const app = express();
 const PORT = 3000;
