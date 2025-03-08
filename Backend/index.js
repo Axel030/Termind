@@ -1,25 +1,38 @@
-console.clear(); //a los que veran temas de servidores, es para que se limpie la consola en caso de guradar cambios en tiempo real
+console.clear(); // Limpia la consola al ejecutar cambios en tiempo real
 // para init el server usar npm run dev
-// dejar de init el sercer control + c
-const express = require('express'); 
+// para dejar de init el server con Crtl + c
+const express = require('express');
+const { Client } = require('pg');
+
 const app = express();
 const PORT = 3000;
 app.use(express.json());
-
-app.get('/informacion', (req, res)=>{
-res.status(200);
-res.send("Bienvenidos, a mi server express");
-console.log("alguien entro al server informacion");
+// para el caso de password siempre dejar vacia, por motivos de estetica
+const client = new Client({
+    user: 'postgres', // user default si no cambiar
+    host: 'localhost',// host igualemte default 
+    database: 'scolegio',// si la db tiene otro nombre cambiar 
+    password: '',// siempre poner su password
+    port: 5432// port es igual default si no cambiar
 });
+client.connect()
+    .then(() => console.log("Conexión a la base de datos exitosa"))
+    .catch(error => console.error("Error en la conexión a la base de datos", error));
 
-app.listen(PORT, (error) =>
-{
-    if(!error)
-    {
-        console.log("server is running");
-        
+app.get('/informacion', async (req, res) => {
+    console.log("Alguien entró al servidor /informacion");
+    try {
+        const result = await client.query('SELECT * FROM alumno');
+        res.status(200).json(result.rows);
+    } catch (error) {
+        console.error("Error en la consulta", error);
+        res.status(500).json({ error: "Error en el servidor" });
     }
-    else{
-        console.log("Error is server");
+});
+app.listen(PORT, (error) => {
+    if (!error) {
+        console.log("server running ");
+    } else {
+        console.log("error server");
     }
 });
