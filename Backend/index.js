@@ -12,7 +12,7 @@ const client = new Client({
     user: 'postgres', // user default si no cambiar
     host: 'localhost',// host igualemte default 
     database: 'scolegio',// si la db tiene otro nombre cambiar 
-    password: '',// siempre poner su password
+    password: '1234',// siempre poner su password
     port: 5432// port es igual default si no cambiar
 });
 client.connect()
