@@ -10,18 +10,20 @@
 <body>
     <div class="container">
         <div class="sidebar">
-            <div class="icons">
-                <button class="icon menu">
+            <div class="hamburger-menu">
+                <button class="hamburger-btn" onclick="toggleMenu()">
                     <img src="imagenes/menu.png" alt="Menú" class="menu-icon">
                 </button>
+            </div>
+            <div class="icons menu-items">
                 <button class="icon search">
-                    <img src="imagenes/search.png" alt="Buscar" class="search-icon">
+                    <img src="imagenes/nuevocn.png" alt="Componer" class="compose-icon">
                 </button>
                 <div class="icon compose">
-                    <img src="imagenes/chat.png" alt="Componer" class="compose-icon">
+                    <img src="imagenes/search.png" alt="Buscar" class="search-icon">
                 </div>
             </div>
-            <div class="recent-chats">
+            <div class="recent-chats menu-items">
                 <p>Chats Recientes</p>
             </div>
         </div>
@@ -35,5 +37,6 @@
             </div>
         </div>
     </div>
+    <script src="chat.js"></script>
 </body>
 </html>
