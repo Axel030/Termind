@@ -1,12 +1,3 @@
-// Animación de fondo tipo Matrix
-const toggleMenu = document.getElementById('toggleMenu');
-const menu = document.getElementById('menu');
-const chatContainer = document.getElementById('chatContainer');
-
-toggleMenu.addEventListener('click', () => {
-  menu.classList.toggle('open');
-  chatContainer.classList.toggle('open');
-});
 const canvas = document.querySelector('.matrix-background');
 const ctx = canvas.getContext('2d');
 
@@ -36,16 +27,3 @@ function drawMatrix() {
 
 
 setInterval(drawMatrix, 50);
-
-// Funcionalidad del chat
-document.getElementById('send-btn').addEventListener('click', () => {
-    const input = document.getElementById('chat-input');
-    if (input.value.trim() !== '') {
-        const chatBox = document.getElementById('chat-box');
-        const message = document.createElement('p');
-        message.textContent = input.value;
-        chatBox.appendChild(message);
-        input.value = '';
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
-});
