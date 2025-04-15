@@ -2,13 +2,19 @@
 
 body {
     background-color: black;
-    color: #00ff00;
+    color: #3e5f8a;
+    transition: background-color 1s ease;
     font-family: 'Press Start 2P', cursive;
     overflow: hidden;
     margin: 0;
     padding: 0;
 
 }
+canvas {
+  display: block;
+}
+
+
 .container {
     display: flex;
     height: 100vh;
