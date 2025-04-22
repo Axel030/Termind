@@ -12,8 +12,8 @@ app.use(express.json());
 const client = new Client({
     user: 'postgres', // user default si no cambiar
     host: 'localhost',// host igualemte default 
-    database: 'Scolegio',// si la db tiene otro nombre cambiar 
-    password: 'marcogh3141.',// siempre poner su password
+    database: 'scolegio',// si la db tiene otro nombre cambiar 
+    password: '1234',// siempre poner su password
     port: 5432// port es igual default si no cambiar
 });
 client.connect()
