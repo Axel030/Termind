@@ -8,7 +8,7 @@ body {
     overflow: hidden;
     margin: 0;
     padding: 0;
-
+   
 }
 canvas {
   display: block;
@@ -51,7 +51,7 @@ canvas {
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #00ff00;
   }
 
   .toggle-menu {
@@ -71,7 +71,16 @@ canvas {
     left: 0;
   }
 
- 
+  #new-chat-btn {
+    width: 105%;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: left;
+}
 
   .menu.open ~ .chat-container {
     margin-left: 250px;
@@ -96,8 +105,9 @@ canvas {
     margin: 50px auto;
     max-width: 1050px;
     padding: 20px;
-    border: 4px solid #00ff00;
+    border: 4px solid #3e5f8a;
     background-color: #000;
+    transition: border-color 1s; /* Transición suave */
 }
 
 .chat-header {
@@ -109,8 +119,9 @@ canvas {
     height: 400px;
     overflow-y: auto;
     padding: 10px;
-    border: 2px solid #00ff00;
+    border: 2px solid #3e5f8a;
     background: black;
+    transition: border-color 1s; /* Transición suave */
 }
 
 .input-area {
@@ -122,21 +133,36 @@ canvas {
     flex: 1;
     padding: 10px;
     font-family: 'Press Start 2P', cursive;
-    border: 2px solid #00ff00;
+    border: 2px solid #3e5f8a;
     background: black;
-    color: #00ff00;
+    color: #3e5f8a;
+    transition: border-color 1s; /* Transición suave */
+    transition: color 1s; /* Transición suave */
 }
 
 #send-btn {
     background: black;
     color: #00ff00;
-    border: 2px solid #00ff00;
+    border: 2px solid #3e5f8a;
     padding: 10px;
     cursor: pointer;
+    transition: border-color 1s; /* Transición suave */
 }
 .sidebar.active .menu {
     display: flex; 
     flex-direction: column;
     gap: 30px; 
     background-color: transparent;
+}
+#chat-conta {
+  width: 250px;
+  height: 110px;
+  background-color: transparent;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  position: relative;
+  padding: 20px;
+  overflow-y: auto;
+color : #fff;
 }
