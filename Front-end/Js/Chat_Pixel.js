@@ -1,7 +1,7 @@
 // Animación de fondo tipo Matrix
 const toggleMenu = document.getElementById('toggleMenu');
 const menu = document.getElementById('menu');
-const chatContainer = document.getElementById('chatContainer');
+const chatContainer = document.querySelector('.chat-container');
 
 toggleMenu.addEventListener('click', () => {
   menu.classList.toggle('open');
@@ -59,4 +59,37 @@ setTimeout(() => {
 // Espera 3 segundos antes de cambiar
 setTimeout(() => {
     color = "#00ff00"; // Cambio a verde Matrix
-}, 6000);
+}, 5000);
+
+const inputarea = document.getElementById('chat-input');
+const chatinput = document.getElementById('chat-input');
+const sendbtn = document.getElementById('send-btn');
+const chatcaja = document.querySelector('.chat-box');
+const chatconten = document.querySelector('.chat-container');
+setTimeout(() => {
+    inputarea.style.borderColor = '#00ff00';
+}, 5000); // Cambia el tiempo aquí si lo necesitas
+setTimeout(() => {
+    chatinput.style.color = '#00ff00';
+}, 5000); // Cambia el tiempo aquí si lo necesitas
+setTimeout(() => {
+    sendbtn.style.borderColor = '#00ff00';
+}, 5000); // Cambia el tiempo aquí si lo necesitas
+setTimeout(() => {
+    chatcaja.style.borderColor = '#00ff00';
+}, 5000); // Cambia el tiempo aquí si lo necesitas
+setTimeout(() => {
+    chatconten.style.borderColor = '#00ff00';
+}, 5000); // Cambia el tiempo aquí si lo necesitas
+
+const chatBox = document.getElementById('chat-box');
+const newChatBtn = document.getElementById('new-chat-btn');
+
+// Agrega funcionalidad al botón "Nuevo Chat"
+newChatBtn.addEventListener('click', () => {
+    // Limpia el contenido del contenedor de chat
+    chatBox.innerHTML = '<p>Nuevo chat iniciado. Escribe un mensaje...</p>';
+});
+
+
+
