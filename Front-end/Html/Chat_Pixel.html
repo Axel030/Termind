@@ -3,71 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Retro 16-Bits</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
+    <title>Termid Chat</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../Css/Chat_Pixel.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/Css/Chat_Pixel.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
     <canvas class="matrix-background"></canvas>
    
     <button class="toggle-menu" id="toggleMenu">☰</button>
     <div class="menu" id="menu">
-      <div class="menu-header"></div>
-      <a > <button id="new-chat-btn">Termind</button>
-      </a>
-      <div class="menu-header">Hoy</div>
-      <div id="chat-conta"></div>
-
-      <div class="menu-header">Ayer</div>
-     
-      <div class="menu-header">7 días anteriores</div>
-     
+      <div class="menu-header">Termid</div>
+      <a href="#">Inicio</a>
+      <a href="#">Explorar Termid</a>
+      <div class="menu-header">Historial</div>
+      <a href="#">Hoy</a>
+      <a href="#">Ayer</a>
+      <a href="#">Semana pasada</a>
       <div class="menu-header">Opciones</div>
-      <a href="#">Cambiar a un plan superior</a>
-      <a href="http://127.0.0.1:5500/Html/index.html">Cerrar Sección</a>
+      <a href="#">Configuración</a>
+      <a href="/">Cerrar Sesión</a>
     </div>
-
     <div class="chat-container">
         <header class="chat-header">
-            <h1>💬 Chat Retro</h1>
+            <h1>💬 Termid Chat</h1>
         </header>
         <div class="chat-box" id="chat-box">
-            <p class="bot-message">Bienvenido al chat retro. Escribe un mensaje...</p>
+            <p class="bot-message">¡Hola! Soy Termid, tu asistente virtual. ¿En qué puedo ayudarte hoy?</p>
         </div>
         <div class="input-area">
-         
-            <input type="text" id="chat-input" placeholder="Escribe tu mensaje aquí">
-
-            <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
+            <input type="text" id="chat-input" placeholder="Escribe tu mensaje aquí...">
+            <button id="send-btn">Enviar</button>
         </div>
     </div>
     
-    <script>
-    document.getElementById('send-btn').addEventListener('click', () => {
-        const chatConta = document.getElementById('chat-conta');
-        const chatInput = document.getElementById('chat-input');
-        const chatbox  = document.getElementById('chat-box');
-        if (chatConta && chatInput) {
-            const userMessage = chatInput.value.trim();
-            if (userMessage) {
-                const newMessage = document.createElement('p');
-                const neMessage = document.createElement('p')
-                newMessage.textContent = `${userMessage}`;
-                neMessage.textContent = `${userMessage}`;
-                chatConta.appendChild(newMessage);
-                chatbox.appendChild(neMessage);
-                chatInput.value = '';
-            }
-        } else {
-            console.error('No se encontraron chat-conta o chat-input.');
-        }
-    });
-    </script>
-
-<script src="../JS/Chat_Pixel.js"> </script>
+    <script src="/JS/Chat_Pixel.js"></script>
 </body>
 </html>

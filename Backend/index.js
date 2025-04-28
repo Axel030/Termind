@@ -245,10 +245,11 @@ app.post('/api/db-query', async (req, res) => {
     }
 });
 
-// Función para generar consulta SQL usando OpenAI
 async function generateSQLQuery(question) {
+    // Prompt para comprender mejor el lenguaje natural
     const systemPrompt = `
-Genera EXCLUSIVAMENTE una consulta PostgreSQL válida basada en la pregunta.
+Genera EXCLUSIVAMENTE una consulta PostgreSQL válida basada en la pregunta en lenguaje natural.
+
 Tablas disponibles:
 - "usuarios" (columnas: id (integer), usuario (character varying(20)), nombre (character varying(20)), contraseña (character varying(20)), edad (integer), pais (character varying(50)), genero (character(1)), estado (character(1)), fecharegistro (date))
 - "Alumno" (columnas: id, nombre, apellido, edad, grado, usuario_id)
@@ -262,10 +263,30 @@ Tablas disponibles:
 
 Instrucciones:
 - Solo el código SQL, sin explicaciones ni comentarios
-- Usar comillas dobles para identificadores (ej: SELECT * FROM "Usuario")
-- No incluyas texto fuera de la consulta, solo se quiere exclusivamente la consulta.
-- Si te solicitan información de una tabla y hay varias con el mismo propósito pero diferente nombre (como "Usuario", "usuario" y "usuarios"), intenta usar la que parece más relevante según el contexto.
-- Si la consulta hace referencia a alumnos o estudiantes, usa la tabla "Alumno" o "alumno".
+- Usar comillas dobles para identificadores (ej: SELECT * FROM usuarios)
+- No incluyas texto fuera de la consulta, solo se quiere exclusivamente la consulta SQL.
+- Si la pregunta es sobre usuarios, personas o clientes, utiliza la tabla "usuarios".
+- Si la pregunta es sobre alumnos o estudiantes, utiliza la tabla Alumno.
+- Si la pregunta es sobre materias, clases, asignaturas o cursos, utiliza la tabla curso.
+- Si la pregunta es sobre inscripciones o matrículas, utiliza la tabla matricula.
+- Si la pregunta es sobre profesores, maestros o docentes, utiliza la tabla profesor.
+- Si la pregunta es sobre autos, coches, automóviles o vehículos, utiliza la tabla datos_carro.
+- Si la pregunta es sobre fechas o eventos, utiliza la tabla "prueba_date".
+- Si la pregunta es sobre rutas, caminos, trayectos o viajes, utiliza la tabla "ruta".
+- Usa expresiones comunes en consultas SQL como:
+  * Filtrar por edad: WHERE edad > 18
+  * Ordenar resultados: ORDER BY nombre ASC
+  * Limitar resultados: LIMIT 10
+  * Agrupar resultados: GROUP BY pais
+  * Contar registros: "COUNT(*)"
+  * Obtener promedios: "AVG(edad)"
+  * Utilizar joins: "INNER JOIN "curso" ON "matricula".curso_id = "curso".id"
+- Interpreta expresiones comunes del lenguaje natural como:
+  * "mayores de 20 años" → "WHERE edad > 20"
+  * "ordenados por nombre" → "ORDER BY nombre"
+  * "los primeros 5" → "LIMIT 5"
+  * "agrupados por país" → "GROUP BY pais"
+  * "cuántos hay" → "SELECT COUNT(*)"
 `;
 
     try {
@@ -277,8 +298,9 @@ Instrucciones:
                     { role: "system", content: systemPrompt },
                     { role: "user", content: question }
                 ],
-                temperature: 0,
-                max_tokens: 150
+                temperature: 0.1, // Temperatura más baja para respuestas más coherentes
+                max_tokens: 200,  // Más tokens para consultas más complejas
+                top_p: 0.95       // Mayor precisión en la generación
             },
             {
                 headers: {
@@ -291,16 +313,21 @@ Instrucciones:
         // Extraer la respuesta y procesar para obtener solo la consulta SQL
         const content = response.data.choices[0].message.content.trim();
         
-        // Usar regex para extraer solo la consulta SQL
-        const sqlRegex = /^SELECT.*?(?:;|$)/is;
+        // Usar regex para extraer solo la consulta SQL - patrón mejorado para capturar mejor las consultas
+        const sqlRegex = /^(?:SELECT|WITH|INSERT|UPDATE|DELETE).*?(?:;|$)/is;
         const sqlMatch = content.match(sqlRegex);
-        const sqlQuery = sqlMatch ? sqlMatch[0].trim() : "SELECT * FROM \"Alumno\" LIMIT 5;";
+        
+        // Consulta SQL predeterminada mejorada si no se puede generar una
+        const defaultQuery = "SELECT * FROM \"usuarios\" LIMIT 10;";
+        const sqlQuery = sqlMatch ? sqlMatch[0].trim() : defaultQuery;
+        
+        console.log("Pregunta:", question);
+        console.log("SQL generado:", sqlQuery);
         
         // Calcular los tokens y el costo
         const promptTokens = response.data.usage.prompt_tokens;
         const completionTokens = response.data.usage.completion_tokens;
         const totalTokens = response.data.usage.total_tokens;
-        
         
         return {
             query: sqlQuery,
@@ -308,10 +335,10 @@ Instrucciones:
                 prompt: promptTokens,
                 completion: completionTokens,
                 total: totalTokens
-            },
-            
+            }
         };
     } catch (error) {
+        console.error("Error completo:", error);
         throw new Error(`Error generando consulta SQL: ${error.message}`);
     }
 }
