@@ -8,19 +8,17 @@ body {
     overflow: hidden;
     margin: 0;
     padding: 0;
-
 }
+
 canvas {
-  display: block;
+    display: block;
 }
-
 
 .container {
     display: flex;
     height: 100vh;
     background-color: transparent;
 }
-
 
 .menu {
     position: fixed;
@@ -33,28 +31,28 @@ canvas {
     overflow-y: auto;
     transition: 0.3s;
     padding-top: 50px;
-  }
+}
 
-  .menu a {
+.menu a {
     color: #fff;
     padding: 10px 20px;
     display: block;
     text-decoration: none;
-  }
+}
 
-  .menu a:hover {
+.menu a:hover {
     background: #575757;
-  }
+}
 
-  .menu-header {
+.menu-header {
     padding: 15px 20px;
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
     border-bottom: 1px solid #444;
-  }
+}
 
-  .toggle-menu {
+.toggle-menu {
     position: fixed;
     top: 3px;
     left: 3px;
@@ -65,17 +63,16 @@ canvas {
     padding: 10px 15px;
     cursor: pointer;
     z-index: 100;
-  }
+}
 
-  .menu.open {
+.menu.open {
     left: 0;
-  }
+}
 
- 
-
-  .menu.open ~ .chat-container {
+.menu.open ~ .chat-container {
     margin-left: 250px;
-  }
+}
+
 .matrix-background {
     position: fixed;
     top: 0;
@@ -111,6 +108,21 @@ canvas {
     padding: 10px;
     border: 2px solid #00ff00;
     background: black;
+    scrollbar-width: thin;
+    scrollbar-color: #00ff00 #000;
+}
+
+.chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+    background: #000;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background-color: #00ff00;
+    border-radius: 5px;
 }
 
 .input-area {
@@ -134,9 +146,56 @@ canvas {
     padding: 10px;
     cursor: pointer;
 }
+
 .sidebar.active .menu {
-    display: flex; 
+    display: flex;
     flex-direction: column;
-    gap: 30px; 
+    gap: 30px;
     background-color: transparent;
+}
+
+/* Estilos para los mensajes del chat con ChatGPT */
+.user-message, .bot-message, .error-message, .loading {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 0;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8em;
+    word-break: break-word;
+    max-width: 80%;
+}
+
+.user-message {
+    background-color: rgba(0, 51, 0, 0.7);
+    color: #00ff00;
+    border-left: 4px solid #00ff00;
+    margin-left: auto;
+    text-align: right;
+}
+
+.bot-message {
+    background-color: rgba(0, 26, 0, 0.7);
+    color: #00ff00;
+    border-left: 4px solid #005500;
+    margin-right: auto;
+}
+
+.error-message {
+    background-color: rgba(51, 0, 0, 0.7);
+    color: #ff3333;
+    border-left: 4px solid #ff0000;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.loading {
+    color: #00ff00;
+    text-align: center;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
 }
